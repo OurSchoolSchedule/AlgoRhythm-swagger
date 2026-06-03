@@ -7,23 +7,23 @@ info:
     따라서 모든 error 분류와, message는 상황에 따라 다르게 출력됩니다.
   version: v1
 servers:
-- url: https://edu.rssolplan.com/
-- url: http://localhost:8080
+  - url: https://edu.rssolplan.com/
+  - url: http://localhost:8080
 security:
-- bearerAuth: []
+  - bearerAuth: []
 paths:
   "/api/todos/{todoId}":
     put:
       tags:
-      - todo-controller
+        - todo-controller
       operationId: updateTodo
       parameters:
-      - name: todoId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -69,15 +69,15 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     delete:
       tags:
-      - todo-controller
+        - todo-controller
       operationId: deleteTodo
       parameters:
-      - name: todoId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -114,15 +114,15 @@ paths:
   "/api/payroll/store/staff/{userStoreId}/wage":
     put:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: updateStaffWage
       parameters:
-      - name: userStoreId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: userStoreId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -165,7 +165,7 @@ paths:
   "/api/mypage/staff/profile":
     get:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: getStaffProfile
       responses:
         '200':
@@ -206,7 +206,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     put:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: updateStaffProfile
       requestBody:
         content:
@@ -254,7 +254,7 @@ paths:
   "/api/mypage/owner/store":
     get:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: getOwnerActiveStore
       responses:
         '200':
@@ -295,7 +295,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     put:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: updateOwnerActiveStore
       requestBody:
         content:
@@ -343,7 +343,7 @@ paths:
   "/api/mypage/owner/profile":
     get:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: getOwnerProfile
       responses:
         '200':
@@ -384,7 +384,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     put:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: updateOwnerProfile
       requestBody:
         content:
@@ -432,7 +432,7 @@ paths:
   "/api/me/availabilities":
     get:
       tags:
-      - work-availability-controller
+        - work-availability-controller
       operationId: getAvailability
       responses:
         '200':
@@ -473,7 +473,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     put:
       tags:
-      - work-availability-controller
+        - work-availability-controller
       operationId: patchAvailability
       requestBody:
         content:
@@ -522,7 +522,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-      - work-availability-controller
+        - work-availability-controller
       operationId: createAvailability
       requestBody:
         content:
@@ -570,15 +570,15 @@ paths:
   "/api/todos":
     get:
       tags:
-      - todo-controller
+        - todo-controller
       operationId: getTodosByDate
       parameters:
-      - name: date
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
+        - name: date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
       responses:
         '200':
           description: OK
@@ -618,7 +618,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-      - todo-controller
+        - todo-controller
       operationId: createTodo
       requestBody:
         content:
@@ -666,14 +666,14 @@ paths:
   "/api/store-settings/temporary":
     get:
       tags:
-      - store-setting-controller
+        - store-setting-controller
       operationId: getTemporarySetting
       parameters:
-      - name: key
-        in: query
-        required: true
-        schema:
-          type: string
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -713,7 +713,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-      - store-setting-controller
+        - store-setting-controller
       operationId: saveTemporarySetting
       requestBody:
         content:
@@ -762,14 +762,14 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     delete:
       tags:
-      - store-setting-controller
+        - store-setting-controller
       operationId: deleteTemporarySetting
       parameters:
-      - name: key
-        in: query
-        required: true
-        schema:
-          type: string
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -806,14 +806,14 @@ paths:
   "/api/store-settings/temporary/apply":
     post:
       tags:
-      - store-setting-controller
+        - store-setting-controller
       operationId: applyTemporaryAsDefault
       parameters:
-      - name: key
-        in: query
-        required: true
-        schema:
-          type: string
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -854,7 +854,7 @@ paths:
   "/api/shift-swap/requests":
     post:
       tags:
-      - shift-swap-controller
+        - shift-swap-controller
       operationId: create
       requestBody:
         content:
@@ -904,7 +904,7 @@ paths:
   "/api/schedules/workshifts":
     post:
       tags:
-      - work-shift-controller
+        - work-shift-controller
       operationId: createWorkShift
       requestBody:
         content:
@@ -952,7 +952,7 @@ paths:
   "/api/schedules/requests":
     post:
       tags:
-      - schedule-generation-controller
+        - schedule-generation-controller
       operationId: requestSchedule
       requestBody:
         content:
@@ -1000,15 +1000,15 @@ paths:
   "/api/schedules/requests/{scheduleRequestId}/generate":
     post:
       tags:
-      - schedule-generation-controller
+        - schedule-generation-controller
       operationId: generateSchedule
       parameters:
-      - name: scheduleRequestId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: scheduleRequestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -1055,15 +1055,15 @@ paths:
   "/api/schedules/requests/{scheduleRequestId}/confirm":
     post:
       tags:
-      - schedule-generation-controller
+        - schedule-generation-controller
       operationId: confirmSchedule
       parameters:
-      - name: scheduleRequestId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: scheduleRequestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -1110,7 +1110,7 @@ paths:
   "/api/payroll/admin/minimum-wage":
     post:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: createMinimumWage
       requestBody:
         content:
@@ -1158,7 +1158,7 @@ paths:
   "/api/mypage/staff/stores":
     get:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: listStaffStores
       responses:
         '200':
@@ -1201,7 +1201,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: joinStaffStore
       requestBody:
         content:
@@ -1249,7 +1249,7 @@ paths:
   "/api/mypage/owner/stores":
     get:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: listOwnerStores
       responses:
         '200':
@@ -1292,7 +1292,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: addOwnerStore
       requestBody:
         content:
@@ -1340,7 +1340,7 @@ paths:
   "/api/extra-shift/requests":
     post:
       tags:
-      - extrashift-controller
+        - extrashift-controller
       operationId: create_1
       requestBody:
         content:
@@ -1388,14 +1388,14 @@ paths:
   "/api/auth/refresh-token":
     post:
       tags:
-      - auth-controller
+        - auth-controller
       operationId: refresh
       parameters:
-      - name: Authorization
-        in: header
-        required: true
-        schema:
-          type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -1436,7 +1436,7 @@ paths:
   "/api/auth/onboarding":
     post:
       tags:
-      - onboarding-controller
+        - onboarding-controller
       operationId: onboarding
       requestBody:
         content:
@@ -1484,7 +1484,7 @@ paths:
   "/api/auth/logout":
     post:
       tags:
-      - auth-controller
+        - auth-controller
       operationId: logout
       responses:
         '200':
@@ -1526,7 +1526,7 @@ paths:
   "/api/auth/email-verification/verify":
     post:
       tags:
-      - email-verification-controller
+        - email-verification-controller
       operationId: verifyCode
       requestBody:
         content:
@@ -1540,7 +1540,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/EmailVerificationResponse"
+                "$ref": "#/components/schemas/EmailVerificationAuthResponse"
         '400':
           description: Bad Request
           content:
@@ -1574,7 +1574,7 @@ paths:
   "/api/auth/email-verification/send":
     post:
       tags:
-      - email-verification-controller
+        - email-verification-controller
       operationId: sendVerificationCode
       requestBody:
         content:
@@ -1622,7 +1622,7 @@ paths:
   "/api/auth/dev-token":
     post:
       tags:
-      - dev-token-controller
+        - dev-token-controller
       operationId: generateDevToken
       requestBody:
         content:
@@ -1670,7 +1670,7 @@ paths:
   "/api/attendance/check-out":
     post:
       tags:
-      - attendance-controller
+        - attendance-controller
       operationId: checkOut
       responses:
         '200':
@@ -1712,7 +1712,7 @@ paths:
   "/api/attendance/check-in":
     post:
       tags:
-      - attendance-controller
+        - attendance-controller
       operationId: checkIn
       responses:
         '200':
@@ -1754,15 +1754,15 @@ paths:
   "/api/todos/{todoId}/toggle":
     patch:
       tags:
-      - todo-controller
+        - todo-controller
       operationId: toggleTodoCompleted
       parameters:
-      - name: todoId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: todoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -1803,7 +1803,7 @@ paths:
   "/api/store-settings":
     get:
       tags:
-      - store-setting-controller
+        - store-setting-controller
       operationId: getStoreSetting
       responses:
         '200':
@@ -1844,7 +1844,7 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     patch:
       tags:
-      - store-setting-controller
+        - store-setting-controller
       operationId: updateStoreSetting
       requestBody:
         content:
@@ -1892,15 +1892,15 @@ paths:
   "/api/shift-swap/requests/{requestId}/respond":
     patch:
       tags:
-      - shift-swap-controller
+        - shift-swap-controller
       operationId: respond
       parameters:
-      - name: requestId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -1947,15 +1947,15 @@ paths:
   "/api/shift-swap/requests/{requestId}/manager-approval":
     patch:
       tags:
-      - shift-swap-controller
+        - shift-swap-controller
       operationId: managerApproval
       parameters:
-      - name: requestId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -2002,15 +2002,15 @@ paths:
   "/api/schedules/workshifts/{shiftId}":
     delete:
       tags:
-      - work-shift-controller
+        - work-shift-controller
       operationId: deleteWorkShift
       parameters:
-      - name: shiftId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: shiftId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -2046,15 +2046,15 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     patch:
       tags:
-      - work-shift-controller
+        - work-shift-controller
       operationId: updateWorkShift
       parameters:
-      - name: shiftId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: shiftId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -2101,32 +2101,32 @@ paths:
   "/api/payroll/store/summary/{userStoreId}":
     patch:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: updatePaymentStatus
       parameters:
-      - name: userStoreId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: year
-        in: query
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: isPaid
-        in: query
-        required: true
-        schema:
-          type: boolean
+        - name: userStoreId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: isPaid
+          in: query
+          required: true
+          schema:
+            type: boolean
       responses:
         '200':
           description: OK
@@ -2167,15 +2167,15 @@ paths:
   "/api/mypage/active-store/{storeId}":
     patch:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: updateActiveStore
       parameters:
-      - name: storeId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -2216,15 +2216,15 @@ paths:
   "/api/extra-shift/requests/{requestId}/respond":
     patch:
       tags:
-      - extrashift-controller
+        - extrashift-controller
       operationId: respond_1
       parameters:
-      - name: requestId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -2271,15 +2271,15 @@ paths:
   "/api/extra-shift/requests/{requestId}/manager-approval":
     patch:
       tags:
-      - extrashift-controller
+        - extrashift-controller
       operationId: managerApproval_1
       parameters:
-      - name: requestId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
@@ -2326,15 +2326,15 @@ paths:
   "/api/{storeId}/availabilities":
     get:
       tags:
-      - work-availability-controller
+        - work-availability-controller
       operationId: getAllAvailability
       parameters:
-      - name: storeId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -2377,7 +2377,7 @@ paths:
   "/api/store/staff":
     get:
       tags:
-      - store-controller
+        - store-controller
       operationId: getAllStaff
       responses:
         '200':
@@ -2421,21 +2421,21 @@ paths:
   "/api/store/staff/summary":
     get:
       tags:
-      - store-controller
+        - store-controller
       operationId: getAllStaffSummary
       parameters:
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -2476,7 +2476,7 @@ paths:
   "/api/schedules":
     get:
       tags:
-      - work-shift-controller
+        - work-shift-controller
       operationId: getWorkShifts
       responses:
         '200':
@@ -2519,21 +2519,21 @@ paths:
   "/api/schedules/store/week":
     get:
       tags:
-      - work-shift-controller
+        - work-shift-controller
       operationId: getStoreWorkShiftsByWeek
       parameters:
-      - name: start
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
-      - name: end
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
       responses:
         '200':
           description: OK
@@ -2576,15 +2576,15 @@ paths:
   "/api/schedules/requests/{storeId}/submission-status":
     get:
       tags:
-      - schedule-generation-controller
+        - schedule-generation-controller
       operationId: checkSubmissionStatus
       parameters:
-      - name: storeId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -2626,21 +2626,21 @@ paths:
   "/api/schedules/me/week":
     get:
       tags:
-      - work-shift-controller
+        - work-shift-controller
       operationId: getMyWorkShiftsByWeek
       parameters:
-      - name: start
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
-      - name: end
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
       responses:
         '200':
           description: OK
@@ -2683,14 +2683,14 @@ paths:
   "/api/schedules/candidates":
     get:
       tags:
-      - schedule-generation-controller
+        - schedule-generation-controller
       operationId: getCandidateSchedules
       parameters:
-      - name: key
-        in: query
-        required: true
-        schema:
-          type: string
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -2733,7 +2733,7 @@ paths:
   "/api/payroll/store/wages":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getAllStaffWages
       responses:
         '200':
@@ -2775,21 +2775,21 @@ paths:
   "/api/payroll/store/total":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getStorePayrollTotal
       parameters:
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -2830,21 +2830,21 @@ paths:
   "/api/payroll/store/summary":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getStorePayrollSummary
       parameters:
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -2885,27 +2885,27 @@ paths:
   "/api/payroll/store/staff/{userStoreId}":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getStaffPayrollDetail
       parameters:
-      - name: userStoreId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: userStoreId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -2946,27 +2946,27 @@ paths:
   "/api/payroll/store/employee/{userStoreId}":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getEmployeePayrollDetail
       parameters:
-      - name: userStoreId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: userStoreId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -3007,15 +3007,15 @@ paths:
   "/api/payroll/minimum-wage":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getMinimumWage
       parameters:
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -3056,7 +3056,7 @@ paths:
   "/api/payroll/minimum-wage/current":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getCurrentMinimumWage
       responses:
         '200':
@@ -3098,21 +3098,21 @@ paths:
   "/api/payroll/me":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getMyPayrolls
       parameters:
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -3155,21 +3155,21 @@ paths:
   "/api/payroll/me/total":
     get:
       tags:
-      - payroll-controller
+        - payroll-controller
       operationId: getMyPayrollsTotal
       parameters:
-      - name: year
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - name: month
-        in: query
-        required: false
-        schema:
-          type: integer
-          format: int32
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: month
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
@@ -3210,7 +3210,7 @@ paths:
   "/api/notifications":
     get:
       tags:
-      - notification-controller
+        - notification-controller
       operationId: getNotifications
       responses:
         '200':
@@ -3254,7 +3254,7 @@ paths:
   "/api/mypage/active-store":
     get:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: getActiveStore
       responses:
         '200':
@@ -3296,19 +3296,19 @@ paths:
   "/api/auth/kakao/callback":
     get:
       tags:
-      - auth-controller
+        - auth-controller
       operationId: kakaoCallback
       parameters:
-      - name: code
-        in: query
-        required: true
-        schema:
-          type: string
-      - name: redirect_uri
-        in: query
-        required: false
-        schema:
-          type: string
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: redirect_uri
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -3345,7 +3345,7 @@ paths:
   "/api/attendance/today":
     get:
       tags:
-      - attendance-controller
+        - attendance-controller
       operationId: getToday
       responses:
         '200':
@@ -3387,15 +3387,15 @@ paths:
   "/api/administration-staff/employees/{userStoreId}/profile":
     get:
       tags:
-      - view-profile-controller
+        - view-profile-controller
       operationId: getEmployeeProfile
       parameters:
-      - name: userStoreId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: userStoreId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -3436,27 +3436,27 @@ paths:
   "/api/administration-staff/employees/{userStoreId}/attendance":
     get:
       tags:
-      - view-attendance-controller
+        - view-attendance-controller
       operationId: getEmployeeAttendance
       parameters:
-      - name: userStoreId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: startDate
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
-      - name: endDate
-        in: query
-        required: true
-        schema:
-          type: string
-          format: date
+        - name: userStoreId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
       responses:
         '200':
           description: OK
@@ -3497,15 +3497,15 @@ paths:
   "/api/mypage/staff/stores/{storeId}":
     delete:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: leaveStaffStore
       parameters:
-      - name: storeId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -3542,15 +3542,15 @@ paths:
   "/api/mypage/owner/stores/{storeId}":
     delete:
       tags:
-      - mypage-controller
+        - mypage-controller
       operationId: removeOwnerStore
       parameters:
-      - name: storeId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
@@ -3625,9 +3625,9 @@ components:
         todoType:
           type: string
           enum:
-          - STORE
-          - HANDOVER
-          - PERSONAL
+            - STORE
+            - HANDOVER
+            - PERSONAL
         content:
           type: string
         completed:
@@ -3651,7 +3651,7 @@ components:
           format: int32
           minimum: 0
       required:
-      - hourlyWage
+        - hourlyWage
     StaffProfileUpdateRequest:
       type: object
       properties:
@@ -3760,13 +3760,13 @@ components:
         dayOfWeek:
           type: string
           enum:
-          - MON
-          - TUE
-          - WED
-          - THU
-          - FRI
-          - SAT
-          - SUN
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
         startTime:
           type: string
         endTime:
@@ -3787,9 +3787,9 @@ components:
         status:
           type: string
           enum:
-          - INSERTED
-          - UPDATED
-          - DELETED
+            - INSERTED
+            - UPDATED
+            - DELETED
     TodoCreateRequestDto:
       type: object
       properties:
@@ -3799,17 +3799,17 @@ components:
         todoType:
           type: string
           enum:
-          - STORE
-          - HANDOVER
-          - PERSONAL
+            - STORE
+            - HANDOVER
+            - PERSONAL
         content:
           type: string
           maxLength: 500
           minLength: 0
       required:
-      - content
-      - date
-      - todoType
+        - content
+        - date
+        - todoType
     SegmentDto:
       type: object
       properties:
@@ -3864,15 +3864,15 @@ components:
         status:
           type: string
           enum:
-          - PENDING
-          - ACCEPTED
-          - REJECTED
+            - PENDING
+            - ACCEPTED
+            - REJECTED
         managerApprovalStatus:
           type: string
           enum:
-          - PENDING
-          - APPROVED
-          - REJECTED
+            - PENDING
+            - APPROVED
+            - REJECTED
         createdAt:
           type: string
           format: date-time
@@ -3968,10 +3968,10 @@ components:
           items:
             type: string
             enum:
-            - BALANCED
-            - COVERAGE_FIRST
-            - SENIOR_PRIORITY
-            - FAIR_DISTRIBUTION
+              - BALANCED
+              - COVERAGE_FIRST
+              - SENIOR_PRIORITY
+              - FAIR_DISTRIBUTION
     ScheduleGenerationRequestDto:
       type: object
       properties:
@@ -4238,15 +4238,24 @@ components:
           minLength: 1
           pattern: "^\\d{6}$"
       required:
-      - code
-      - email
-    EmailVerificationResponse:
+        - code
+        - email
+    EmailVerificationAuthResponse:
       type: object
       properties:
         success:
           type: boolean
         message:
           type: string
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        newUser:
+          type: boolean
     EmailVerificationRequest:
       type: object
       properties:
@@ -4254,7 +4263,14 @@ components:
           type: string
           minLength: 1
       required:
-      - email
+        - email
+    EmailVerificationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
     DevTokenRequest:
       type: object
       properties:
@@ -4271,12 +4287,12 @@ components:
         status:
           type: string
           enum:
-          - BEFORE_WORK
-          - WORKING
-          - FINISHED
-          - NO_SCHEDULE
-          - LATE
-          - ABSENT
+            - BEFORE_WORK
+            - WORKING
+            - FINISHED
+            - NO_SCHEDULE
+            - LATE
+            - ABSENT
         checkOutTime:
           type: string
           format: date-time
@@ -4297,12 +4313,12 @@ components:
         status:
           type: string
           enum:
-          - BEFORE_WORK
-          - WORKING
-          - FINISHED
-          - NO_SCHEDULE
-          - LATE
-          - ABSENT
+            - BEFORE_WORK
+            - WORKING
+            - FINISHED
+            - NO_SCHEDULE
+            - LATE
+            - ABSENT
         checkInTime:
           type: string
           format: date-time
@@ -4615,13 +4631,13 @@ components:
         day:
           type: string
           enum:
-          - MON
-          - TUE
-          - WED
-          - THU
-          - FRI
-          - SAT
-          - SUN
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
         status:
           type: string
     StaffWageInfoDto:
@@ -4929,24 +4945,24 @@ components:
         category:
           type: string
           enum:
-          - SCHEDULE_INPUT
-          - SHIFT_SWAP
-          - EXTRA_SHIFT
+            - SCHEDULE_INPUT
+            - SHIFT_SWAP
+            - EXTRA_SHIFT
         type:
           type: string
           enum:
-          - SCHEDULE_INPUT_REQUEST
-          - SHIFT_SWAP_REQUEST
-          - SHIFT_SWAP_NOTIFY_MANAGER
-          - SHIFT_SWAP_MANAGER_APPROVED_REQUESTER
-          - SHIFT_SWAP_MANAGER_APPROVED_RECEIVER
-          - SHIFT_SWAP_MANAGER_REJECTED_REQUESTER
-          - SHIFT_SWAP_MANAGER_REJECTED_RECEIVER
-          - EXTRA_SHIFT_REQUEST_INVITE
-          - EXTRA_SHIFT_NOTIFY_MANAGER
-          - EXTRA_SHIFT_MANAGER_APPROVED_WORKER
-          - EXTRA_SHIFT_MANAGER_REJECTED_WORKER
-          - EXTRA_SHIFT_FILLED_BROADCAST
+            - SCHEDULE_INPUT_REQUEST
+            - SHIFT_SWAP_REQUEST
+            - SHIFT_SWAP_NOTIFY_MANAGER
+            - SHIFT_SWAP_MANAGER_APPROVED_REQUESTER
+            - SHIFT_SWAP_MANAGER_APPROVED_RECEIVER
+            - SHIFT_SWAP_MANAGER_REJECTED_REQUESTER
+            - SHIFT_SWAP_MANAGER_REJECTED_RECEIVER
+            - EXTRA_SHIFT_REQUEST_INVITE
+            - EXTRA_SHIFT_NOTIFY_MANAGER
+            - EXTRA_SHIFT_MANAGER_APPROVED_WORKER
+            - EXTRA_SHIFT_MANAGER_REJECTED_WORKER
+            - EXTRA_SHIFT_FILLED_BROADCAST
         message:
           type: string
         createdAt:
@@ -4961,22 +4977,22 @@ components:
         shiftSwapStatus:
           type: string
           enum:
-          - PENDING
-          - ACCEPTED
-          - REJECTED
+            - PENDING
+            - ACCEPTED
+            - REJECTED
         shiftSwapManagerApprovalStatus:
           type: string
           enum:
-          - PENDING
-          - APPROVED
-          - REJECTED
+            - PENDING
+            - APPROVED
+            - REJECTED
         extraShiftStatus:
           type: string
           enum:
-          - OPEN
-          - FILLED
-          - CANCELLED
-          - EXPIRED
+            - OPEN
+            - FILLED
+            - CANCELLED
+            - EXPIRED
         read:
           type: boolean
     WorkAvailabilityGetResponseDto:
@@ -5000,12 +5016,12 @@ components:
         status:
           type: string
           enum:
-          - BEFORE_WORK
-          - WORKING
-          - FINISHED
-          - NO_SCHEDULE
-          - LATE
-          - ABSENT
+            - BEFORE_WORK
+            - WORKING
+            - FINISHED
+            - NO_SCHEDULE
+            - LATE
+            - ABSENT
         isCheckedIn:
           type: boolean
         isCheckedOut:
