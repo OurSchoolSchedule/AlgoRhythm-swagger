@@ -61,6 +61,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -105,19 +111,25 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/staff/{userStoreId}/wage":
+  "/api/school-setting/periods/{periodId}":
     put:
       tags:
-        - payroll-controller
-      operationId: updateStaffWage
+        - school-setting-controller
+      operationId: updatePeriod
       parameters:
-        - name: userStoreId
+        - name: periodId
           in: path
           required: true
           schema:
@@ -127,11 +139,15 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/StaffWageUpdateDto"
+              "$ref": "#/components/schemas/PeriodSettingRequest"
         required: true
       responses:
         '200':
           description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/PeriodSettingResponse"
         '400':
           description: Bad Request
           content:
@@ -152,6 +168,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -162,18 +184,20 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/staff/profile":
-    get:
+    delete:
       tags:
-        - mypage-controller
-      operationId: getStaffProfile
+        - school-setting-controller
+      operationId: deletePeriod
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StaffProfileResponse"
         '400':
           description: Bad Request
           content:
@@ -194,6 +218,60 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/mypage/teacher/profile":
+    get:
+      tags:
+        - mypage-controller
+      operationId: getTeacherProfile
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TeacherProfileResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -207,12 +285,12 @@ paths:
     put:
       tags:
         - mypage-controller
-      operationId: updateStaffProfile
+      operationId: updateTeacherProfile
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/StaffProfileUpdateRequest"
+              "$ref": "#/components/schemas/TeacherProfileUpdateRequest"
         required: true
       responses:
         '200':
@@ -220,7 +298,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/StaffProfileResponse"
+                "$ref": "#/components/schemas/TeacherProfileResponse"
         '400':
           description: Bad Request
           content:
@@ -241,6 +319,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -251,18 +335,18 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/owner/store":
+  "/api/mypage/admin/school":
     get:
       tags:
         - mypage-controller
-      operationId: getOwnerActiveStore
+      operationId: getAdminActiveSchool
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/OwnerStoreResponse"
+                "$ref": "#/components/schemas/AdminSchoolResponse"
         '400':
           description: Bad Request
           content:
@@ -283,6 +367,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -296,12 +386,12 @@ paths:
     put:
       tags:
         - mypage-controller
-      operationId: updateOwnerActiveStore
+      operationId: updateAdminActiveSchool
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/OwnerStoreUpdateRequest"
+              "$ref": "#/components/schemas/AdminSchoolUpdateRequest"
         required: true
       responses:
         '200':
@@ -309,7 +399,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/OwnerStoreResponse"
+                "$ref": "#/components/schemas/AdminSchoolResponse"
         '400':
           description: Bad Request
           content:
@@ -330,6 +420,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -340,18 +436,18 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/owner/profile":
+  "/api/mypage/admin/profile":
     get:
       tags:
         - mypage-controller
-      operationId: getOwnerProfile
+      operationId: getAdminProfile
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/OwnerProfileResponse"
+                "$ref": "#/components/schemas/AdminProfileResponse"
         '400':
           description: Bad Request
           content:
@@ -372,6 +468,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -385,12 +487,12 @@ paths:
     put:
       tags:
         - mypage-controller
-      operationId: updateOwnerProfile
+      operationId: updateAdminProfile
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/OwnerProfileUpdateRequest"
+              "$ref": "#/components/schemas/AdminProfileUpdateRequest"
         required: true
       responses:
         '200':
@@ -398,7 +500,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/OwnerProfileResponse"
+                "$ref": "#/components/schemas/AdminProfileResponse"
         '400':
           description: Bad Request
           content:
@@ -419,6 +521,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -429,18 +537,20 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/me/availabilities":
+  "/api/me/unavailabilities":
     get:
       tags:
-        - work-availability-controller
-      operationId: getAvailability
+        - teacher-availability-controller
+      operationId: getMyUnavailabilities
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/WorkAvailabilityGetResponseDto"
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TeacherAvailabilityResponseDto"
         '400':
           description: Bad Request
           content:
@@ -461,6 +571,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -473,13 +589,13 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     put:
       tags:
-        - work-availability-controller
-      operationId: patchAvailability
+        - teacher-availability-controller
+      operationId: replaceUnavailabilities
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/WorkAvailabilityRequestDto"
+              "$ref": "#/components/schemas/TeacherAvailabilityRequestDto"
         required: true
       responses:
         '200':
@@ -489,7 +605,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/WorkAvailabilityPatchResponseDto"
+                  "$ref": "#/components/schemas/TeacherAvailabilityResponseDto"
         '400':
           description: Bad Request
           content:
@@ -510,6 +626,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -522,13 +644,13 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-        - work-availability-controller
-      operationId: createAvailability
+        - teacher-availability-controller
+      operationId: addUnavailabilities
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/WorkAvailabilityRequestDto"
+              "$ref": "#/components/schemas/TeacherAvailabilityRequestDto"
         required: true
       responses:
         '200':
@@ -536,7 +658,9 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/WorkAvailabilityCreateResponseDto"
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TeacherAvailabilityResponseDto"
         '400':
           description: Bad Request
           content:
@@ -557,6 +681,120 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/voice-commands/preview":
+    post:
+      tags:
+        - voice-command-controller
+      operationId: preview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/VoiceCommandRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseCommandPreviewResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/voice-commands/confirm":
+    post:
+      tags:
+        - voice-command-controller
+      operationId: confirm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CommandConfirmRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -610,6 +848,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -657,30 +901,32 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/store-settings/temporary":
+  "/api/timetable":
     get:
       tags:
-        - store-setting-controller
-      operationId: getTemporarySetting
-      parameters:
-        - name: key
-          in: query
-          required: true
-          schema:
-            type: string
+        - timetable-controller
+      operationId: getTimetables
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/StoreSettingDto"
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TimetableDto"
         '400':
           description: Bad Request
           content:
@@ -705,6 +951,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -713,13 +965,13 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-        - store-setting-controller
-      operationId: saveTemporarySetting
+        - timetable-controller
+      operationId: createTimetable
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/StoreSettingDto"
+              "$ref": "#/components/schemas/TimetableCreateDto"
         required: true
       responses:
         '200':
@@ -727,9 +979,7 @@ paths:
           content:
             "*/*":
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                "$ref": "#/components/schemas/TimetableDto"
         '400':
           description: Bad Request
           content:
@@ -754,45 +1004,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-    delete:
-      tags:
-        - store-setting-controller
-      operationId: deleteTemporarySetting
-      parameters:
-        - name: key
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -803,64 +1016,16 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/store-settings/temporary/apply":
+  "/api/timetable-swap/requests":
     post:
       tags:
-        - store-setting-controller
-      operationId: applyTemporaryAsDefault
-      parameters:
-        - name: key
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StoreSettingDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/shift-swap/requests":
-    post:
-      tags:
-        - shift-swap-controller
+        - timetable-swap-controller
       operationId: create
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ShiftSwapRequestCreateDto"
+              "$ref": "#/components/schemas/CreateSwapRequestDto"
         required: true
       responses:
         '200':
@@ -868,9 +1033,7 @@ paths:
           content:
             "*/*":
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ShiftSwapResponseDto"
+                "$ref": "#/components/schemas/TimetableSwapRequest"
         '400':
           description: Bad Request
           content:
@@ -895,50 +1058,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/workshifts":
-    post:
-      tags:
-        - work-shift-controller
-      operationId: createWorkShift
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/WorkShiftCreateDto"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/WorkShiftDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -949,61 +1070,13 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/requests":
+  "/api/timetable-swap/requests/{requestId}/respond":
     post:
       tags:
-        - schedule-generation-controller
-      operationId: requestSchedule
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ScheduleRequestDto"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ScheduleRequestResponseDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/requests/{scheduleRequestId}/generate":
-    post:
-      tags:
-        - schedule-generation-controller
-      operationId: generateSchedule
+        - timetable-swap-controller
+      operationId: respond
       parameters:
-        - name: scheduleRequestId
+        - name: requestId
           in: path
           required: true
           schema:
@@ -1013,7 +1086,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ScheduleGenerationRequestDto"
+              "$ref": "#/components/schemas/ActionDto"
         required: true
       responses:
         '200':
@@ -1021,7 +1094,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/ScheduleGenerationResponseDto"
+                "$ref": "#/components/schemas/TimetableSwapRequest"
         '400':
           description: Bad Request
           content:
@@ -1046,19 +1119,25 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/requests/{scheduleRequestId}/confirm":
+  "/api/timetable-swap/requests/{requestId}/approve":
     post:
       tags:
-        - schedule-generation-controller
-      operationId: confirmSchedule
+        - timetable-swap-controller
+      operationId: managerApproval
       parameters:
-        - name: scheduleRequestId
+        - name: requestId
           in: path
           required: true
           schema:
@@ -1068,7 +1147,178 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ConfirmScheduleRequestDto"
+              "$ref": "#/components/schemas/ActionDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TimetableSwapRequest"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable-generation/requests":
+    post:
+      tags:
+        - schedule-generation-controller
+      operationId: requestTimetable
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TimetableRequest"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable-generation/requests/{timetableRequestId}/generate":
+    post:
+      tags:
+        - schedule-generation-controller
+      operationId: generateTimetable
+      parameters:
+        - name: timetableRequestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TimetableGenerationRequestDto"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties: {}
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable-generation/requests/{timetableRequestId}/confirm":
+    post:
+      tags:
+        - schedule-generation-controller
+      operationId: confirmTimetable
+      parameters:
+        - name: timetableRequestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ConfirmTimetableRequestDto"
         required: true
       responses:
         '200':
@@ -1101,30 +1351,30 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/admin/minimum-wage":
+  "/api/teacher-attendance/check-out":
     post:
       tags:
-        - payroll-controller
-      operationId: createMinimumWage
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/MinimumWageUpdateDto"
-        required: true
+        - teacher-attendance-controller
+      operationId: checkOut
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/MinimumWage"
+                "$ref": "#/components/schemas/TeacherAttendanceCheckOutResponse"
         '400':
           description: Bad Request
           content:
@@ -1149,17 +1399,78 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/staff/stores":
+  "/api/teacher-attendance/check-in":
+    post:
+      tags:
+        - teacher-attendance-controller
+      operationId: checkIn
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/TeacherAttendanceCheckInResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/substitutes/requests":
     get:
       tags:
-        - mypage-controller
-      operationId: listStaffStores
+        - substitute-controller
+      operationId: getRequests
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            default: OPEN
       responses:
         '200':
           description: OK
@@ -1168,7 +1479,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/StoreSimpleResponse"
+                  "$ref": "#/components/schemas/SubstituteRequestDetail"
         '400':
           description: Bad Request
           content:
@@ -1189,6 +1500,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -1201,152 +1518,13 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     post:
       tags:
-        - mypage-controller
-      operationId: joinStaffStore
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/StaffJoinStoreRequest"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StoreSimpleResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/owner/stores":
-    get:
-      tags:
-        - mypage-controller
-      operationId: listOwnerStores
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/StoreSimpleResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-    post:
-      tags:
-        - mypage-controller
-      operationId: addOwnerStore
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/OwnerCreateStoreRequest"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StoreSimpleResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/extra-shift/requests":
-    post:
-      tags:
-        - extrashift-controller
+        - substitute-controller
       operationId: create_1
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ExtrashiftCreateDto"
+              "$ref": "#/components/schemas/SubstituteCreateRequest"
         required: true
       responses:
         '200':
@@ -1354,7 +1532,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/ExtrashiftRequestDetailDto"
+                "$ref": "#/components/schemas/SubstituteRequestDetail"
         '400':
           description: Bad Request
           content:
@@ -1375,6 +1553,422 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school-setting":
+    get:
+      tags:
+        - school-setting-controller
+      operationId: getSetting
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolSettingResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    post:
+      tags:
+        - school-setting-controller
+      operationId: createOrUpdateSetting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SchoolSettingRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolSettingResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school-setting/periods":
+    get:
+      tags:
+        - school-setting-controller
+      operationId: getPeriods
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/PeriodSettingResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    post:
+      tags:
+        - school-setting-controller
+      operationId: addPeriod
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PeriodSettingRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/PeriodSettingResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/mypage/teacher/schools":
+    get:
+      tags:
+        - mypage-controller
+      operationId: listTeacherSchools
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SchoolSimpleResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    post:
+      tags:
+        - mypage-controller
+      operationId: joinTeacherSchool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TeacherJoinSchoolRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolSimpleResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/mypage/admin/schools":
+    get:
+      tags:
+        - mypage-controller
+      operationId: listAdminSchools
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SchoolSimpleResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    post:
+      tags:
+        - mypage-controller
+      operationId: addAdminSchool
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AdminCreateSchoolRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolSimpleResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -1427,6 +2021,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -1475,6 +2075,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -1513,6 +2119,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -1565,6 +2177,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -1609,6 +2227,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -1661,86 +2285,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/attendance/check-out":
-    post:
-      tags:
-        - attendance-controller
-      operationId: checkOut
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/AttendanceCheckOutResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/attendance/check-in":
-    post:
-      tags:
-        - attendance-controller
-      operationId: checkIn
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/AttendanceCheckInResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -1794,44 +2340,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/store-settings":
-    get:
-      tags:
-        - store-setting-controller
-      operationId: getStoreSetting
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StoreSettingDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -1842,170 +2352,13 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-    patch:
-      tags:
-        - store-setting-controller
-      operationId: updateStoreSetting
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/StoreSettingDto"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StoreSettingDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/shift-swap/requests/{requestId}/respond":
-    patch:
-      tags:
-        - shift-swap-controller
-      operationId: respond
-      parameters:
-        - name: requestId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ShiftSwapRespondDto"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ShiftSwapResponseDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/shift-swap/requests/{requestId}/manager-approval":
-    patch:
-      tags:
-        - shift-swap-controller
-      operationId: managerApproval
-      parameters:
-        - name: requestId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ShiftSwapManagerApprovalDto"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ShiftSwapResponseDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/workshifts/{shiftId}":
+  "/api/timetable/{timetableId}":
     delete:
       tags:
-        - work-shift-controller
-      operationId: deleteWorkShift
+        - timetable-controller
+      operationId: deleteTimetable
       parameters:
-        - name: shiftId
+        - name: timetableId
           in: path
           required: true
           schema:
@@ -2038,6 +2391,12 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
@@ -2046,10 +2405,10 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
     patch:
       tags:
-        - work-shift-controller
-      operationId: updateWorkShift
+        - timetable-controller
+      operationId: updateTimetable
       parameters:
-        - name: shiftId
+        - name: timetableId
           in: path
           required: true
           schema:
@@ -2059,7 +2418,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/WorkShiftUpdateDto"
+              "$ref": "#/components/schemas/TimetableCreateDto"
         required: true
       responses:
         '200':
@@ -2067,7 +2426,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/WorkShiftDto"
+                "$ref": "#/components/schemas/TimetableDto"
         '400':
           description: Bad Request
           content:
@@ -2092,48 +2451,43 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/summary/{userStoreId}":
+  "/api/substitutes/responses/{responseId}/approval":
     patch:
       tags:
-        - payroll-controller
-      operationId: updatePaymentStatus
+        - substitute-controller
+      operationId: approve
       parameters:
-        - name: userStoreId
+        - name: responseId
           in: path
           required: true
           schema:
             type: integer
             format: int64
-        - name: year
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: isPaid
-          in: query
-          required: true
-          schema:
-            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SubstituteApprovalRequest"
+        required: true
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/PaymentRecordDto"
+                "$ref": "#/components/schemas/SubstituteApprovalDetail"
         '400':
           description: Bad Request
           content:
@@ -2158,51 +2512,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/active-store/{storeId}":
-    patch:
-      tags:
-        - mypage-controller
-      operationId: updateActiveStore
-      parameters:
-        - name: storeId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ActiveStoreResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -2213,10 +2524,10 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/extra-shift/requests/{requestId}/respond":
+  "/api/substitutes/requests/{requestId}/response":
     patch:
       tags:
-        - extrashift-controller
+        - substitute-controller
       operationId: respond_1
       parameters:
         - name: requestId
@@ -2229,7 +2540,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ExtrashiftRespondDto"
+              "$ref": "#/components/schemas/SubstituteRespondRequest"
         required: true
       responses:
         '200':
@@ -2237,7 +2548,7 @@ paths:
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/ExtrashiftResponseDetailDto"
+                "$ref": "#/components/schemas/SubstituteResponseDetail"
         '400':
           description: Bad Request
           content:
@@ -2262,74 +2573,25 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/extra-shift/requests/{requestId}/manager-approval":
+  "/api/mypage/active-school/{schoolId}":
     patch:
       tags:
-        - extrashift-controller
-      operationId: managerApproval_1
+        - mypage-controller
+      operationId: updateActiveSchool
       parameters:
-        - name: requestId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ExtrashiftManagerApprovalDto"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ExtrashiftManagerApprovalDetailDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/{storeId}/availabilities":
-    get:
-      tags:
-        - work-availability-controller
-      operationId: getAllAvailability
-      parameters:
-        - name: storeId
+        - name: schoolId
           in: path
           required: true
           schema:
@@ -2341,9 +2603,7 @@ paths:
           content:
             "*/*":
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/WorkAvailabilityAllResponseDto"
+                "$ref": "#/components/schemas/ActiveSchoolResponse"
         '400':
           description: Bad Request
           content:
@@ -2368,46 +2628,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/store/staff":
-    get:
-      tags:
-        - store-controller
-      operationId: getAllStaff
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/StoreStaffResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -2418,173 +2640,237 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/store/staff/summary":
+  "/api/timetable/year/{year}/semester/{semester}":
     get:
       tags:
-        - store-controller
-      operationId: getAllStaffSummary
+        - timetable-controller
+      operationId: getTimetablesByYearSemester
       parameters:
         - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/AllStaffSummaryResponseDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules":
-    get:
-      tags:
-        - work-shift-controller
-      operationId: getWorkShifts
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: object
-                additionalProperties: {}
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/store/week":
-    get:
-      tags:
-        - work-shift-controller
-      operationId: getStoreWorkShiftsByWeek
-      parameters:
-        - name: start
-          in: query
-          required: true
-          schema:
-            type: string
-            format: date
-        - name: end
-          in: query
-          required: true
-          schema:
-            type: string
-            format: date
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/WorkShiftDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/requests/{storeId}/submission-status":
-    get:
-      tags:
-        - schedule-generation-controller
-      operationId: checkSubmissionStatus
-      parameters:
-        - name: storeId
           in: path
           required: true
           schema:
             type: integer
-            format: int64
+            format: int32
+        - name: semester
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TimetableDto"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable/me":
+    get:
+      tags:
+        - timetable-controller
+      operationId: getMyTimetable
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TimetableDto"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable/me/year/{year}/semester/{semester}":
+    get:
+      tags:
+        - timetable-controller
+      operationId: getMyTimetableByYearSemester
+      parameters:
+        - name: year
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: semester
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TimetableDto"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable-swap/requests/me":
+    get:
+      tags:
+        - timetable-swap-controller
+      operationId: getMyRequests
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TimetableSwapRequest"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/timetable-generation/teachers/without-availability":
+    get:
+      tags:
+        - schedule-generation-controller
+      operationId: getTeachersWithoutAvailability
       responses:
         '200':
           description: OK
@@ -2617,59 +2903,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/me/week":
-    get:
-      tags:
-        - work-shift-controller
-      operationId: getMyWorkShiftsByWeek
-      parameters:
-        - name: start
-          in: query
-          required: true
-          schema:
-            type: string
-            format: date
-        - name: end
-          in: query
-          required: true
-          schema:
-            type: string
-            format: date
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/MyWorkShiftDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -2680,11 +2915,11 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/schedules/candidates":
+  "/api/timetable-generation/candidates":
     get:
       tags:
         - schedule-generation-controller
-      operationId: getCandidateSchedules
+      operationId: getCandidates
       parameters:
         - name: key
           in: query
@@ -2724,24 +2959,30 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/wages":
+  "/api/teacher-attendance/today":
     get:
       tags:
-        - payroll-controller
-      operationId: getAllStaffWages
+        - teacher-attendance-controller
+      operationId: getToday
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/StoreStaffWagesResponseDto"
+                "$ref": "#/components/schemas/TeacherAttendanceTodayResponse"
         '400':
           description: Bad Request
           content:
@@ -2766,57 +3007,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/total":
-    get:
-      tags:
-        - payroll-controller
-      operationId: getStorePayrollTotal
-      parameters:
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StorePayrollSummaryDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -2827,292 +3019,11 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/summary":
+  "/api/teacher-attendance/school/today":
     get:
       tags:
-        - payroll-controller
-      operationId: getStorePayrollSummary
-      parameters:
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/OwnerPayrollSummaryDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/staff/{userStoreId}":
-    get:
-      tags:
-        - payroll-controller
-      operationId: getStaffPayrollDetail
-      parameters:
-        - name: userStoreId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/StaffPayrollResponseDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/store/employee/{userStoreId}":
-    get:
-      tags:
-        - payroll-controller
-      operationId: getEmployeePayrollDetail
-      parameters:
-        - name: userStoreId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/EmployeePayrollDto"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/minimum-wage":
-    get:
-      tags:
-        - payroll-controller
-      operationId: getMinimumWage
-      parameters:
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/MinimumWage"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/minimum-wage/current":
-    get:
-      tags:
-        - payroll-controller
-      operationId: getCurrentMinimumWage
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/MinimumWage"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/me":
-    get:
-      tags:
-        - payroll-controller
-      operationId: getMyPayrolls
-      parameters:
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
+        - teacher-attendance-controller
+      operationId: getSchoolAttendanceToday
       responses:
         '200':
           description: OK
@@ -3121,7 +3032,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/StaffMyPayrollResponseDto"
+                  "$ref": "#/components/schemas/TeacherAttendanceTodayResponse"
         '400':
           description: Bad Request
           content:
@@ -3142,6 +3053,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -3152,31 +3069,20 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/payroll/me/total":
+  "/api/school/unavailabilities":
     get:
       tags:
-        - payroll-controller
-      operationId: getMyPayrollsTotal
-      parameters:
-        - name: year
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: month
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
+        - teacher-availability-controller
+      operationId: getAllUnavailabilities
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/MyPayrollListDto"
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TeacherAvailabilityResponseDto"
         '400':
           description: Bad Request
           content:
@@ -3197,6 +3103,160 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/teachers":
+    get:
+      tags:
+        - school-controller
+      operationId: getTeachers
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TeacherSummaryResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/members":
+    get:
+      tags:
+        - school-controller
+      operationId: getMembers
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TeacherSummaryResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/me":
+    get:
+      tags:
+        - school-controller
+      operationId: getActiveSchool
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolSummaryResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -3245,24 +3305,30 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/active-store":
+  "/api/mypage/active-school":
     get:
       tags:
         - mypage-controller
-      operationId: getActiveStore
+      operationId: getActiveSchool_1
       responses:
         '200':
           description: OK
           content:
             "*/*":
               schema:
-                "$ref": "#/components/schemas/ActiveStoreResponse"
+                "$ref": "#/components/schemas/ActiveSchoolResponse"
         '400':
           description: Bad Request
           content:
@@ -3283,6 +3349,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -3336,44 +3408,8 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/attendance/today":
-    get:
-      tags:
-        - attendance-controller
-      operationId: getToday
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/AttendanceTodayResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -3423,6 +3459,12 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -3488,19 +3530,25 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/staff/stores/{storeId}":
+  "/api/mypage/teacher/schools/{schoolId}":
     delete:
       tags:
         - mypage-controller
-      operationId: leaveStaffStore
+      operationId: leaveTeacherSchool
       parameters:
-        - name: storeId
+        - name: schoolId
           in: path
           required: true
           schema:
@@ -3533,19 +3581,25 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
         '500':
           description: Internal Server Error
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/mypage/owner/stores/{storeId}":
+  "/api/mypage/admin/schools/{schoolId}":
     delete:
       tags:
         - mypage-controller
-      operationId: removeOwnerStore
+      operationId: removeAdminSchool
       parameters:
-        - name: storeId
+        - name: schoolId
           in: path
           required: true
           schema:
@@ -3574,6 +3628,63 @@ paths:
                 "$ref": "#/components/schemas/ApiResponseObject"
         '404':
           description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/me/unavailabilities/{availabilityId}":
+    delete:
+      tags:
+        - teacher-availability-controller
+      operationId: deleteUnavailability
+      parameters:
+        - name: availabilityId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
           content:
             "*/*":
               schema:
@@ -3625,7 +3736,7 @@ components:
         todoType:
           type: string
           enum:
-            - STORE
+            - SCHOOL
             - HANDOVER
             - PERSONAL
         content:
@@ -3643,48 +3754,47 @@ components:
         updatedAt:
           type: string
           format: date-time
-    StaffWageUpdateDto:
+    PeriodSettingRequest:
       type: object
       properties:
-        hourlyWage:
+        periodNumber:
           type: integer
           format: int32
-          minimum: 0
-      required:
-        - hourlyWage
-    StaffProfileUpdateRequest:
+        startTime:
+          type: string
+        endTime:
+          type: string
+    PeriodSettingResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        periodNumber:
+          type: integer
+          format: int32
+        startTime:
+          type: string
+        endTime:
+          type: string
+    TeacherProfileUpdateRequest:
       type: object
       properties:
         username:
           type: string
         email:
           type: string
-        bankId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-    BankAccount:
+    CurrentSchool:
       type: object
       properties:
-        bankId:
-          type: integer
-          format: int32
-        bankName:
-          type: string
-        accountNumber:
-          type: string
-    CurrentStore:
-      type: object
-      properties:
-        storeId:
+        schoolId:
           type: integer
           format: int64
         name:
           type: string
-        storeCode:
+        schoolCode:
           type: string
-    StaffProfileResponse:
+    TeacherProfileResponse:
       type: object
       properties:
         userId:
@@ -3700,11 +3810,9 @@ components:
           type: string
         employmentStatus:
           type: string
-        currentStore:
-          "$ref": "#/components/schemas/CurrentStore"
-        bankAccount:
-          "$ref": "#/components/schemas/BankAccount"
-    OwnerStoreUpdateRequest:
+        currentSchool:
+          "$ref": "#/components/schemas/CurrentSchool"
+    AdminSchoolUpdateRequest:
       type: object
       properties:
         name:
@@ -3713,13 +3821,13 @@ components:
           type: string
         phoneNumber:
           type: string
-    OwnerStoreResponse:
+    AdminSchoolResponse:
       type: object
       properties:
-        storeId:
+        schoolId:
           type: integer
           format: int64
-        storeCode:
+        schoolCode:
           type: string
         name:
           type: string
@@ -3727,16 +3835,14 @@ components:
           type: string
         phoneNumber:
           type: string
-    OwnerProfileUpdateRequest:
+    AdminProfileUpdateRequest:
       type: object
       properties:
         username:
           type: string
         email:
           type: string
-        businessRegistrationNumber:
-          type: string
-    OwnerProfileResponse:
+    AdminProfileResponse:
       type: object
       properties:
         userId:
@@ -3751,8 +3857,6 @@ components:
         position:
           type: string
         employmentStatus:
-          type: string
-        businessRegistrationNumber:
           type: string
     AvailabilityItem:
       type: object
@@ -3767,29 +3871,94 @@ components:
             - FRI
             - SAT
             - SUN
-        startTime:
+        periodNumber:
+          type: integer
+          format: int32
+        reason:
           type: string
-        endTime:
-          type: string
-    WorkAvailabilityRequestDto:
+    TeacherAvailabilityRequestDto:
       type: object
       properties:
-        availabilities:
+        unavailabilities:
           type: array
           items:
             "$ref": "#/components/schemas/AvailabilityItem"
-    WorkAvailabilityPatchResponseDto:
+    TeacherAvailabilityResponseDto:
       type: object
       properties:
-        availabilityId:
+        id:
           type: integer
           format: int64
-        status:
+        schoolUserId:
+          type: integer
+          format: int64
+        dayOfWeek:
           type: string
           enum:
-            - INSERTED
-            - UPDATED
-            - DELETED
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
+        periodNumber:
+          type: integer
+          format: int32
+        reason:
+          type: string
+    VoiceCommandRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          minLength: 1
+        lang:
+          type: string
+      required:
+        - text
+    ApiResponseCommandPreviewResponse:
+      type: object
+      description: API 공통 응답 구조
+      properties:
+        success:
+          type: boolean
+          description: 성공 여부
+          example: false
+        error:
+          type: string
+          description: 에러 코드
+          example: BAD_REQUEST
+        message:
+          type: string
+          description: 에러/메시지 내용
+          example: 잘못된 요청입니다.
+        data:
+          "$ref": "#/components/schemas/CommandPreviewResponse"
+          description: 응답 데이터
+    CommandPreviewResponse:
+      type: object
+      properties:
+        draftToken:
+          type: string
+        intentType:
+          type: string
+        confidence:
+          type: string
+        description:
+          type: string
+        preview: {}
+        expiresAt:
+          type: string
+          format: date-time
+    CommandConfirmRequest:
+      type: object
+      properties:
+        draftToken:
+          type: string
+          minLength: 1
+      required:
+        - draftToken
     TodoCreateRequestDto:
       type: object
       properties:
@@ -3799,7 +3968,7 @@ components:
         todoType:
           type: string
           enum:
-            - STORE
+            - SCHOOL
             - HANDOVER
             - PERSONAL
         content:
@@ -3810,55 +3979,301 @@ components:
         - content
         - date
         - todoType
-    SegmentDto:
+    TimetableCreateDto:
       type: object
       properties:
+        academicYear:
+          type: integer
+          format: int32
+        semester:
+          type: integer
+          format: int32
+        schoolClassId:
+          type: integer
+          format: int64
+        periodSettingId:
+          type: integer
+          format: int64
+        dayOfWeek:
+          type: string
+          enum:
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
+        subjectId:
+          type: integer
+          format: int64
+        teacherSchoolUserId:
+          type: integer
+          format: int64
+    TimetableDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        schoolId:
+          type: integer
+          format: int64
+        academicYear:
+          type: integer
+          format: int32
+        semester:
+          type: integer
+          format: int32
+        schoolClassId:
+          type: integer
+          format: int64
+        grade:
+          type: integer
+          format: int32
+        classNumber:
+          type: integer
+          format: int32
+        periodSettingId:
+          type: integer
+          format: int64
+        periodNumber:
+          type: integer
+          format: int32
+        periodStartTime:
+          type: string
+        periodEndTime:
+          type: string
+        dayOfWeek:
+          type: string
+          enum:
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
+        subjectId:
+          type: integer
+          format: int64
+        subjectName:
+          type: string
+        teacherId:
+          type: integer
+          format: int64
+        teacherName:
+          type: string
+    CreateSwapRequestDto:
+      type: object
+      properties:
+        requesterTimetableId:
+          type: integer
+          format: int64
+        requesterDate:
+          type: string
+          format: date
+        receiverTimetableId:
+          type: integer
+          format: int64
+        receiverDate:
+          type: string
+          format: date
+        reason:
+          type: string
+    PeriodSetting:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        schoolSetting:
+          "$ref": "#/components/schemas/SchoolSetting"
+        periodNumber:
+          type: integer
+          format: int32
         startTime:
           type: string
         endTime:
           type: string
-    StoreSettingDto:
+    School:
       type: object
       properties:
-        openTime:
+        id:
+          type: integer
+          format: int64
+        schoolCode:
           type: string
-        closeTime:
+        name:
           type: string
-        useSegments:
-          type: boolean
-        segments:
+        address:
+          type: string
+        phoneNumber:
+          type: string
+        settings:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    SchoolClass:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        school:
+          "$ref": "#/components/schemas/School"
+        academicYear:
+          type: integer
+          format: int32
+        grade:
+          type: integer
+          format: int32
+        classNumber:
+          type: integer
+          format: int32
+        homeroomTeacher:
+          "$ref": "#/components/schemas/SchoolUser"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    SchoolSetting:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        school:
+          "$ref": "#/components/schemas/School"
+        periodDuration:
+          type: integer
+          format: int32
+        breakDuration:
+          type: integer
+          format: int32
+        lunchStartTime:
+          type: string
+        lunchEndTime:
+          type: string
+        periods:
           type: array
           items:
-            "$ref": "#/components/schemas/SegmentDto"
-        hasBreakTime:
-          type: boolean
-        breakStartTime:
+            "$ref": "#/components/schemas/PeriodSetting"
+        createdAt:
           type: string
-        breakEndTime:
+          format: date-time
+        updatedAt:
           type: string
-    ShiftSwapRequestCreateDto:
+          format: date-time
+    SchoolUser:
       type: object
       properties:
-        shiftId:
+        id:
           type: integer
           format: int64
-        reason:
+        user:
+          "$ref": "#/components/schemas/User"
+        school:
+          "$ref": "#/components/schemas/School"
+        position:
           type: string
-    ShiftSwapResponseDto:
+          enum:
+            - ADMIN
+            - TEACHER
+        employmentStatus:
+          type: string
+          enum:
+            - HIRED
+            - ON_LEAVE
+            - RESIGNED
+        hireDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Subject:
       type: object
       properties:
-        requestId:
+        id:
           type: integer
           format: int64
-        shiftId:
+        school:
+          "$ref": "#/components/schemas/School"
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    Timetable:
+      type: object
+      properties:
+        id:
           type: integer
           format: int64
-        requesterId:
+        school:
+          "$ref": "#/components/schemas/School"
+        academicYear:
+          type: integer
+          format: int32
+        semester:
+          type: integer
+          format: int32
+        schoolClass:
+          "$ref": "#/components/schemas/SchoolClass"
+        periodSetting:
+          "$ref": "#/components/schemas/PeriodSetting"
+        dayOfWeek:
+          type: string
+          enum:
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
+        subject:
+          "$ref": "#/components/schemas/Subject"
+        teacher:
+          "$ref": "#/components/schemas/SchoolUser"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    TimetableSwapRequest:
+      type: object
+      properties:
+        id:
           type: integer
           format: int64
-        receiverId:
-          type: integer
-          format: int64
+        school:
+          "$ref": "#/components/schemas/School"
+        requesterTimetable:
+          "$ref": "#/components/schemas/Timetable"
+        requesterDate:
+          type: string
+          format: date
+        receiverTimetable:
+          "$ref": "#/components/schemas/Timetable"
+        receiverDate:
+          type: string
+          format: date
+        requester:
+          "$ref": "#/components/schemas/SchoolUser"
+        receiver:
+          "$ref": "#/components/schemas/SchoolUser"
         reason:
           type: string
         status:
@@ -3867,6 +4282,7 @@ components:
             - PENDING
             - ACCEPTED
             - REJECTED
+            - CANCELLED
         managerApprovalStatus:
           type: string
           enum:
@@ -3876,87 +4292,93 @@ components:
         createdAt:
           type: string
           format: date-time
-    WorkShiftCreateDto:
-      type: object
-      properties:
-        userStoreId:
-          type: integer
-          format: int64
-        startDatetime:
+        updatedAt:
           type: string
           format: date-time
-        endDatetime:
-          type: string
-          format: date-time
-    WorkShiftDto:
+    User:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        userStoreId:
-          type: integer
-          format: int64
-        userId:
-          type: integer
-          format: int64
         username:
           type: string
-        startDatetime:
+        email:
           type: string
-          format: date-time
-        endDatetime:
+        profileImageUrl:
           type: string
-          format: date-time
-        shiftStatus:
+        provider:
           type: string
-    ScheduleRequestDto:
-      type: object
-      properties:
-        startDate:
+        providerId:
           type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        staffRequirement:
-          "$ref": "#/components/schemas/StaffRequirementDto"
-    SegmentStaffDto:
-      type: object
-      properties:
-        segmentIndex:
-          type: integer
-          format: int32
-        requiredStaff:
-          type: integer
-          format: int32
-    StaffRequirementDto:
-      type: object
-      properties:
-        segmentStaffList:
-          type: array
-          items:
-            "$ref": "#/components/schemas/SegmentStaffDto"
-        requiredStaff:
-          type: integer
-          format: int32
-    ScheduleRequestResponseDto:
-      type: object
-      properties:
-        scheduleRequestId:
+        activeSchoolId:
           type: integer
           format: int64
-        storeId:
+        kakaoAccessToken:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ActionDto:
+      type: object
+      properties:
+        action:
+          type: string
+    TimetableRequest:
+      type: object
+      properties:
+        id:
           type: integer
           format: int64
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
+        school:
+          "$ref": "#/components/schemas/School"
         status:
           type: string
+          enum:
+            - REQUESTED
+            - GENERATED
+            - CONFIRMED
+        temporarySettingKey:
+          type: string
+        candidateTimetableKey:
+          type: string
+        timetableSet:
+          "$ref": "#/components/schemas/TimetableSet"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    TimetableSet:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        school:
+          "$ref": "#/components/schemas/School"
+        academicYear:
+          type: integer
+          format: int32
+        semester:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     GenerationOptionsDto:
       type: object
       properties:
@@ -3972,115 +4394,182 @@ components:
               - COVERAGE_FIRST
               - SENIOR_PRIORITY
               - FAIR_DISTRIBUTION
-    ScheduleGenerationRequestDto:
+    TimetableGenerationRequestDto:
       type: object
       properties:
+        academicYear:
+          type: integer
+          format: int32
+        semester:
+          type: integer
+          format: int32
+        slotRequirements:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TimetableSlotRequirementDto"
         generationOptions:
           "$ref": "#/components/schemas/GenerationOptionsDto"
-    ScheduleGenerationResponseDto:
+    TimetableSlotRequirementDto:
       type: object
       properties:
-        status:
-          type: string
-        scheduleRequestId:
+        schoolClassId:
           type: integer
           format: int64
-        storeId:
-          type: integer
-          format: int64
-        timeSegments:
-          type: array
-          items:
-            "$ref": "#/components/schemas/ScheduleSettingSegmentResponseDto"
-        candidateScheduleKey:
+        dayOfWeek:
           type: string
-        generatedCount:
+          enum:
+            - MON
+            - TUE
+            - WED
+            - THU
+            - FRI
+            - SAT
+            - SUN
+        periodNumber:
           type: integer
           format: int32
-        unsubmittedEmployeeIds:
-          type: array
-          items:
-            type: integer
-            format: int64
-    ScheduleSettingSegmentResponseDto:
-      type: object
-      properties:
-        id:
+        subjectId:
           type: integer
           format: int64
-        startTime:
-          type: string
-        endTime:
-          type: string
-        requiredStaff:
-          type: integer
-          format: int32
-    ConfirmScheduleRequestDto:
+    ConfirmTimetableRequestDto:
       type: object
       properties:
         candidateIndex:
           type: integer
           format: int32
-    MinimumWageUpdateDto:
-      type: object
-      properties:
-        hourlyWage:
+        academicYear:
           type: integer
           format: int32
-        effectiveFrom:
+        semester:
+          type: integer
+          format: int32
+        startDate:
           type: string
           format: date
-        effectiveTo:
+        endDate:
           type: string
           format: date
-        description:
+    TeacherAttendanceCheckOutResponse:
+      type: object
+      properties:
+        message:
           type: string
-    MinimumWage:
+        workDate:
+          type: string
+          format: date
+        status:
+          type: string
+        checkOutTime:
+          type: string
+          format: date-time
+    TeacherAttendanceCheckInResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        workDate:
+          type: string
+          format: date
+        status:
+          type: string
+        checkInTime:
+          type: string
+          format: date-time
+    SubstituteCreateRequest:
+      type: object
+      properties:
+        timetableId:
+          type: integer
+          format: int64
+        substituteDate:
+          type: string
+          format: date
+        note:
+          type: string
+      required:
+        - substituteDate
+        - timetableId
+    SubstituteRequestDetail:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        hourlyWage:
+        schoolId:
+          type: integer
+          format: int64
+        timetableId:
+          type: integer
+          format: int64
+        dayOfWeek:
+          type: string
+        periodNumber:
           type: integer
           format: int32
-        effectiveFrom:
+        substituteDate:
           type: string
           format: date
-        effectiveTo:
+        status:
           type: string
-          format: date
-        description:
+        note:
           type: string
         createdAt:
           type: string
           format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-    StaffJoinStoreRequest:
+    SchoolSettingRequest:
       type: object
       properties:
-        storeCode:
+        periodDuration:
+          type: integer
+          format: int32
+        breakDuration:
+          type: integer
+          format: int32
+        lunchStartTime:
+          type: string
+        lunchEndTime:
+          type: string
+    SchoolSettingResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        periodDuration:
+          type: integer
+          format: int32
+        breakDuration:
+          type: integer
+          format: int32
+        lunchStartTime:
+          type: string
+        lunchEndTime:
+          type: string
+        periods:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PeriodSettingResponse"
+    TeacherJoinSchoolRequest:
+      type: object
+      properties:
+        schoolCode:
           type: string
         hireDate:
           type: string
           format: date
-    StoreSimpleResponse:
+    SchoolSimpleResponse:
       type: object
       properties:
-        storeId:
+        schoolId:
           type: integer
           format: int64
-        storeCode:
+        schoolCode:
           type: string
         name:
           type: string
         address:
           type: string
         phoneNumber:
-          type: string
-        businessRegistrationNumber:
           type: string
         position:
           type: string
@@ -4089,7 +4578,7 @@ components:
         hireDate:
           type: string
           format: date
-    OwnerCreateStoreRequest:
+    AdminCreateSchoolRequest:
       type: object
       properties:
         name:
@@ -4098,67 +4587,9 @@ components:
           type: string
         phoneNumber:
           type: string
-        businessRegistrationNumber:
-          type: string
         hireDate:
           type: string
           format: date
-    WorkAvailabilityCreateResponseDto:
-      type: object
-      properties:
-        message:
-          type: string
-        userStoreId:
-          type: integer
-          format: int64
-        inserted:
-          type: integer
-          format: int32
-    ExtrashiftCreateDto:
-      type: object
-      properties:
-        shiftId:
-          type: integer
-          format: int64
-        headcount:
-          type: integer
-          format: int32
-        note:
-          type: string
-    ExtrashiftRequestDetailDto:
-      type: object
-      properties:
-        requestId:
-          type: integer
-          format: int64
-        storeId:
-          type: integer
-          format: int64
-        ownerUserId:
-          type: integer
-          format: int64
-        baseShiftId:
-          type: integer
-          format: int64
-        start:
-          type: string
-        end:
-          type: string
-        headcountRequested:
-          type: integer
-          format: int32
-        headcountFilled:
-          type: integer
-          format: int32
-        status:
-          type: string
-        note:
-          type: string
-        receiverUserIds:
-          type: array
-          items:
-            type: integer
-            format: int64
     RefreshTokenResponse:
       type: object
       properties:
@@ -4169,22 +4600,13 @@ components:
       properties:
         role:
           type: string
-        storeCode:
+        schoolCode:
           type: string
         name:
           type: string
         address:
           type: string
         phoneNumber:
-          type: string
-        businessRegistrationNumber:
-          type: string
-        storeSetting:
-          "$ref": "#/components/schemas/StoreSettingDto"
-        bankId:
-          type: integer
-          format: int32
-        accountNumber:
           type: string
         hireDate:
           type: string
@@ -4195,38 +4617,27 @@ components:
         userId:
           type: integer
           format: int64
-        userStoreId:
+        schoolUserId:
           type: integer
           format: int64
-        storeId:
+        schoolId:
           type: integer
           format: int64
         position:
           type: string
         employmentStatus:
           type: string
-        storeCode:
+        schoolCode:
           type: string
-        storeName:
+        schoolName:
           type: string
         address:
           type: string
         phoneNumber:
           type: string
-        businessRegistrationNumber:
-          type: string
-        bankId:
-          type: integer
-          format: int32
-        bankName:
-          type: string
-        accountNumber:
-          type: string
         hireDate:
           type: string
           format: date
-        storeSetting:
-          "$ref": "#/components/schemas/StoreSettingDto"
     EmailVerificationVerifyRequest:
       type: object
       properties:
@@ -4276,117 +4687,65 @@ components:
       properties:
         email:
           type: string
-    AttendanceCheckOutResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        workDate:
-          type: string
-          format: date
-        status:
-          type: string
-          enum:
-            - BEFORE_WORK
-            - WORKING
-            - FINISHED
-            - NO_SCHEDULE
-            - LATE
-            - ABSENT
-        checkOutTime:
-          type: string
-          format: date-time
-        workStartTime:
-          type: string
-          format: date-time
-        workEndTime:
-          type: string
-          format: date-time
-    AttendanceCheckInResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        workDate:
-          type: string
-          format: date
-        status:
-          type: string
-          enum:
-            - BEFORE_WORK
-            - WORKING
-            - FINISHED
-            - NO_SCHEDULE
-            - LATE
-            - ABSENT
-        checkInTime:
-          type: string
-          format: date-time
-        workStartTime:
-          type: string
-          format: date-time
-        workEndTime:
-          type: string
-          format: date-time
-    ShiftSwapRespondDto:
+    SubstituteApprovalRequest:
       type: object
       properties:
         action:
           type: string
-    ShiftSwapManagerApprovalDto:
+          minLength: 1
+      required:
+        - action
+    SubstituteApprovalDetail:
+      type: object
+      properties:
+        requestId:
+          type: integer
+          format: int64
+        responseId:
+          type: integer
+          format: int64
+        requestStatus:
+          type: string
+        teacherAction:
+          type: string
+        managerApproval:
+          type: string
+    SubstituteRespondRequest:
       type: object
       properties:
         action:
           type: string
-    WorkShiftUpdateDto:
+          minLength: 1
+      required:
+        - action
+    SubstituteResponseDetail:
       type: object
       properties:
-        startDatetime:
+        requestId:
+          type: integer
+          format: int64
+        responseId:
+          type: integer
+          format: int64
+        candidateSchoolUserId:
+          type: integer
+          format: int64
+        teacherName:
+          type: string
+        teacherAction:
+          type: string
+        managerApproval:
+          type: string
+        createdAt:
           type: string
           format: date-time
-        endDatetime:
-          type: string
-          format: date-time
-    PaymentRecordDto:
+    ActiveSchoolResponse:
       type: object
       properties:
-        paymentRecordId:
+        schoolId:
           type: integer
           format: int64
-        userStoreId:
-          type: integer
-          format: int64
-        userId:
-          type: integer
-          format: int64
-        username:
-          type: string
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        year:
-          type: integer
-          format: int32
-        month:
-          type: integer
-          format: int32
-        paidAt:
-          type: string
-          format: date-time
-        paidByUserId:
-          type: integer
-          format: int64
-        paid:
-          type: boolean
-    ActiveStoreResponse:
-      type: object
-      properties:
-        storeId:
-          type: integer
-          format: int64
-        storeCode:
+        schoolCode:
           type: string
         name:
           type: string
@@ -4394,106 +4753,10 @@ components:
           type: string
         phoneNumber:
           type: string
-        businessRegistrationNumber:
-          type: string
         position:
           type: string
         employmentStatus:
           type: string
-    ExtrashiftRespondDto:
-      type: object
-      properties:
-        action:
-          type: string
-    ExtrashiftResponseDetailDto:
-      type: object
-      properties:
-        requestId:
-          type: integer
-          format: int64
-        responseId:
-          type: integer
-          format: int64
-        storeId:
-          type: integer
-          format: int64
-        ownerUserId:
-          type: integer
-          format: int64
-        candidateUserId:
-          type: integer
-          format: int64
-        start:
-          type: string
-        end:
-          type: string
-        headcountRequested:
-          type: integer
-          format: int32
-        headcountFilled:
-          type: integer
-          format: int32
-        requestStatus:
-          type: string
-        workerAction:
-          type: string
-        managerApproval:
-          type: string
-        createdAt:
-          type: string
-    ExtrashiftManagerApprovalDto:
-      type: object
-      properties:
-        responseId:
-          type: integer
-          format: int64
-        action:
-          type: string
-    ExtrashiftManagerApprovalDetailDto:
-      type: object
-      properties:
-        requestId:
-          type: integer
-          format: int64
-        responseId:
-          type: integer
-          format: int64
-        storeId:
-          type: integer
-          format: int64
-        ownerUserId:
-          type: integer
-          format: int64
-        candidateUserId:
-          type: integer
-          format: int64
-        start:
-          type: string
-        end:
-          type: string
-        headcountRequested:
-          type: integer
-          format: int32
-        headcountFilled:
-          type: integer
-          format: int32
-        requestStatus:
-          type: string
-        workerAction:
-          type: string
-        managerApproval:
-          type: string
-        shiftAssigned:
-          type: boolean
-    WorkAvailabilityAllResponseDto:
-      type: object
-      properties:
-        username:
-          type: string
-        availabilities:
-          type: array
-          items:
-            "$ref": "#/components/schemas/AvailabilityItem"
     TodoListResponseDto:
       type: object
       properties:
@@ -4512,91 +4775,10 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/TodoResponseDto"
-    StoreStaffResponse:
-      type: object
-      properties:
-        userStoreId:
-          type: integer
-          format: int64
-        username:
-          type: string
-    AllStaffSummaryResponseDto:
-      type: object
-      properties:
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        year:
-          type: integer
-          format: int32
-        month:
-          type: integer
-          format: int32
-        totalStaffCount:
-          type: integer
-          format: int32
-        staffList:
-          type: array
-          items:
-            "$ref": "#/components/schemas/StaffSummaryDto"
-    StaffSummaryDto:
-      type: object
-      properties:
-        userStoreId:
-          type: integer
-          format: int64
-        username:
-          type: string
-        profileImageUrl:
-          type: string
-        role:
-          type: string
-        employmentStatus:
-          type: string
-        monthlyPay:
-          type: number
-        email:
-          type: string
-        tel:
-          type: string
-        bankName:
-          type: string
-        accountNumber:
-          type: string
-        lateCount:
-          type: integer
-          format: int32
-        absenceCount:
-          type: integer
-          format: int32
-        totalShiftCount:
-          type: integer
-          format: int32
-    MyWorkShiftDto:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        startDatetime:
-          type: string
-          format: date-time
-        endDatetime:
-          type: string
-          format: date-time
-        shiftStatus:
-          type: string
     CandidateSchedule:
       type: object
       properties:
-        storeId:
+        schoolId:
           type: integer
           format: int64
         shifts:
@@ -4619,16 +4801,15 @@ components:
     CandidateShift:
       type: object
       properties:
-        userStoreId:
+        schoolUserId:
           type: integer
           format: int64
-        username:
+        teacherName:
           type: string
-        startTime:
-          type: string
-        endTime:
-          type: string
-        day:
+        schoolClassId:
+          type: integer
+          format: int64
+        dayOfWeek:
           type: string
           enum:
             - MON
@@ -4638,376 +4819,15 @@ components:
             - FRI
             - SAT
             - SUN
+        periodNumber:
+          type: integer
+          format: int32
+        subjectId:
+          type: integer
+          format: int64
         status:
           type: string
-    StaffWageInfoDto:
-      type: object
-      properties:
-        userStoreId:
-          type: integer
-          format: int64
-        staffName:
-          type: string
-        hourlyWage:
-          type: integer
-          format: int32
-        effectiveWage:
-          type: integer
-          format: int32
-    StoreStaffWagesResponseDto:
-      type: object
-      properties:
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        currentMinimumWage:
-          type: integer
-          format: int32
-        staffWages:
-          type: array
-          items:
-            "$ref": "#/components/schemas/StaffWageInfoDto"
-    EmployeePayrollDto:
-      type: object
-      properties:
-        userStoreId:
-          type: integer
-          format: int64
-        userId:
-          type: integer
-          format: int64
-        username:
-          type: string
-        profileImageUrl:
-          type: string
-        storeName:
-          type: string
-        hourlyWage:
-          type: integer
-          format: int32
-        totalWorkMinutes:
-          type: integer
-          format: int64
-        regularMinutes:
-          type: integer
-          format: int64
-        overtimeMinutes:
-          type: integer
-          format: int64
-        nightMinutes:
-          type: integer
-          format: int64
-        holidayMinutes:
-          type: integer
-          format: int64
-        breakMinutes:
-          type: integer
-          format: int64
-        lateMinutes:
-          type: integer
-          format: int64
-        regularPay:
-          type: number
-        overtimePay:
-          type: number
-        nightPay:
-          type: number
-        holidayPay:
-          type: number
-        weeklyHolidayPay:
-          type: number
-        totalPay:
-          type: number
-        totalShiftCount:
-          type: integer
-          format: int32
-        lateCount:
-          type: integer
-          format: int32
-        absenceCount:
-          type: integer
-          format: int32
-        paid:
-          type: boolean
-    StorePayrollSummaryDto:
-      type: object
-      properties:
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        year:
-          type: integer
-          format: int32
-        month:
-          type: integer
-          format: int32
-        totalEmployees:
-          type: integer
-          format: int32
-        totalRegularPay:
-          type: number
-        totalOvertimePay:
-          type: number
-        totalNightPay:
-          type: number
-        totalHolidayPay:
-          type: number
-        totalWeeklyHolidayPay:
-          type: number
-        totalPay:
-          type: number
-        employees:
-          type: array
-          items:
-            "$ref": "#/components/schemas/EmployeePayrollDto"
-    OwnerPayrollSummaryDto:
-      type: object
-      properties:
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        year:
-          type: integer
-          format: int32
-        month:
-          type: integer
-          format: int32
-        totalStaffCount:
-          type: integer
-          format: int32
-        totalBasePay:
-          type: number
-        totalOvertimePay:
-          type: number
-        totalNightPay:
-          type: number
-        totalHolidayPay:
-          type: number
-        totalWeeklyAllowance:
-          type: number
-        grandTotalPay:
-          type: number
-        staffPayrolls:
-          type: array
-          items:
-            "$ref": "#/components/schemas/StaffPayrollResponseDto"
-    StaffPayrollResponseDto:
-      type: object
-      properties:
-        userStoreId:
-          type: integer
-          format: int64
-        staffName:
-          type: string
-        hourlyWage:
-          type: integer
-          format: int32
-        totalWorkMinutes:
-          type: integer
-          format: int64
-        breakMinutes:
-          type: integer
-          format: int64
-        overtimeMinutes:
-          type: integer
-          format: int64
-        nightWorkMinutes:
-          type: integer
-          format: int64
-        holidayWorkMinutes:
-          type: integer
-          format: int64
-        lateMinutes:
-          type: integer
-          format: int64
-        basePay:
-          type: number
-        overtimePay:
-          type: number
-        nightPay:
-          type: number
-        holidayPay:
-          type: number
-        weeklyAllowance:
-          type: number
-        totalPay:
-          type: number
-        totalShiftCount:
-          type: integer
-          format: int32
-        attendanceCount:
-          type: integer
-          format: int32
-        lateCount:
-          type: integer
-          format: int32
-        absenceCount:
-          type: integer
-          format: int32
-        bankName:
-          type: string
-        accountNumber:
-          type: string
-    StaffMyPayrollResponseDto:
-      type: object
-      properties:
-        storeId:
-          type: integer
-          format: int64
-        storeName:
-          type: string
-        year:
-          type: integer
-          format: int32
-        month:
-          type: integer
-          format: int32
-        hourlyWage:
-          type: integer
-          format: int32
-        totalWorkMinutes:
-          type: integer
-          format: int64
-        breakMinutes:
-          type: integer
-          format: int64
-        overtimeMinutes:
-          type: integer
-          format: int64
-        nightWorkMinutes:
-          type: integer
-          format: int64
-        holidayWorkMinutes:
-          type: integer
-          format: int64
-        lateMinutes:
-          type: integer
-          format: int64
-        basePay:
-          type: number
-        overtimePay:
-          type: number
-        nightPay:
-          type: number
-        holidayPay:
-          type: number
-        weeklyAllowance:
-          type: number
-        totalPay:
-          type: number
-        totalShiftCount:
-          type: integer
-          format: int32
-        attendanceCount:
-          type: integer
-          format: int32
-        lateCount:
-          type: integer
-          format: int32
-        absenceCount:
-          type: integer
-          format: int32
-    MyPayrollListDto:
-      type: object
-      properties:
-        userId:
-          type: integer
-          format: int64
-        username:
-          type: string
-        profileImageUrl:
-          type: string
-        year:
-          type: integer
-          format: int32
-        month:
-          type: integer
-          format: int32
-        grandTotalPay:
-          type: number
-        payrolls:
-          type: array
-          items:
-            "$ref": "#/components/schemas/EmployeePayrollDto"
-    NotificationResponseDto:
-      type: object
-      properties:
-        storeName:
-          type: string
-        profileImageUrl:
-          type: string
-        category:
-          type: string
-          enum:
-            - SCHEDULE_INPUT
-            - SHIFT_SWAP
-            - EXTRA_SHIFT
-        type:
-          type: string
-          enum:
-            - SCHEDULE_INPUT_REQUEST
-            - SHIFT_SWAP_REQUEST
-            - SHIFT_SWAP_NOTIFY_MANAGER
-            - SHIFT_SWAP_MANAGER_APPROVED_REQUESTER
-            - SHIFT_SWAP_MANAGER_APPROVED_RECEIVER
-            - SHIFT_SWAP_MANAGER_REJECTED_REQUESTER
-            - SHIFT_SWAP_MANAGER_REJECTED_RECEIVER
-            - EXTRA_SHIFT_REQUEST_INVITE
-            - EXTRA_SHIFT_NOTIFY_MANAGER
-            - EXTRA_SHIFT_MANAGER_APPROVED_WORKER
-            - EXTRA_SHIFT_MANAGER_REJECTED_WORKER
-            - EXTRA_SHIFT_FILLED_BROADCAST
-        message:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        shiftSwapRequestId:
-          type: integer
-          format: int64
-        extraShiftRequestId:
-          type: integer
-          format: int64
-        shiftSwapStatus:
-          type: string
-          enum:
-            - PENDING
-            - ACCEPTED
-            - REJECTED
-        shiftSwapManagerApprovalStatus:
-          type: string
-          enum:
-            - PENDING
-            - APPROVED
-            - REJECTED
-        extraShiftStatus:
-          type: string
-          enum:
-            - OPEN
-            - FILLED
-            - CANCELLED
-            - EXPIRED
-        read:
-          type: boolean
-    WorkAvailabilityGetResponseDto:
-      type: object
-      properties:
-        message:
-          type: string
-        userStoreId:
-          type: integer
-          format: int64
-        availabilities:
-          type: array
-          items:
-            "$ref": "#/components/schemas/AvailabilityItem"
-    AttendanceTodayResponse:
+    TeacherAttendanceTodayResponse:
       type: object
       properties:
         workDate:
@@ -5015,13 +4835,6 @@ components:
           format: date
         status:
           type: string
-          enum:
-            - BEFORE_WORK
-            - WORKING
-            - FINISHED
-            - NO_SCHEDULE
-            - LATE
-            - ABSENT
         isCheckedIn:
           type: boolean
         isCheckedOut:
@@ -5032,12 +4845,103 @@ components:
         checkOutTime:
           type: string
           format: date-time
-        workStartTime:
+    TeacherSummaryResponse:
+      type: object
+      properties:
+        schoolUserId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        position:
+          type: string
+        employmentStatus:
+          type: string
+    SchoolSummaryResponse:
+      type: object
+      properties:
+        schoolId:
+          type: integer
+          format: int64
+        schoolCode:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+        totalMemberCount:
+          type: integer
+          format: int32
+        teacherCount:
+          type: integer
+          format: int32
+        adminCount:
+          type: integer
+          format: int32
+    NotificationResponseDto:
+      type: object
+      properties:
+        schoolName:
+          type: string
+        profileImageUrl:
+          type: string
+        category:
+          type: string
+          enum:
+            - SCHEDULE_INPUT
+            - TIMETABLE_SWAP
+            - SUBSTITUTE
+        type:
+          type: string
+          enum:
+            - SCHEDULE_INPUT_REQUEST
+            - TIMETABLE_SWAP_REQUEST
+            - TIMETABLE_SWAP_NOTIFY_ADMIN
+            - TIMETABLE_SWAP_ADMIN_APPROVED_REQUESTER
+            - TIMETABLE_SWAP_ADMIN_APPROVED_RECEIVER
+            - TIMETABLE_SWAP_ADMIN_REJECTED_REQUESTER
+            - TIMETABLE_SWAP_ADMIN_REJECTED_RECEIVER
+            - SUBSTITUTE_REQUEST_INVITE
+            - SUBSTITUTE_NOTIFY_ADMIN
+            - SUBSTITUTE_ADMIN_APPROVED_TEACHER
+            - SUBSTITUTE_ADMIN_REJECTED_TEACHER
+            - SUBSTITUTE_FILLED_BROADCAST
+        message:
+          type: string
+        createdAt:
           type: string
           format: date-time
-        workEndTime:
+        timetableSwapRequestId:
+          type: integer
+          format: int64
+        substituteRequestId:
+          type: integer
+          format: int64
+        timetableSwapStatus:
           type: string
-          format: date-time
+          enum:
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+            - CANCELLED
+        timetableSwapManagerApprovalStatus:
+          type: string
+          enum:
+            - PENDING
+            - APPROVED
+            - REJECTED
+        substituteStatus:
+          type: string
+          enum:
+            - OPEN
+            - FILLED
+            - CANCELLED
+            - EXPIRED
+        read:
+          type: boolean
     ViewProfileResponse:
       type: object
       properties:
@@ -5049,11 +4953,7 @@ components:
           type: string
         position:
           type: string
-        storeName:
-          type: string
-        bankName:
-          type: string
-        accountNumber:
+        schoolName:
           type: string
         email:
           type: string
@@ -5074,10 +4974,10 @@ components:
     ViewAttendanceResponse:
       type: object
       properties:
-        userStoreId:
+        schoolUserId:
           type: integer
           format: int64
-        staffName:
+        teacherName:
           type: string
         role:
           type: string
