@@ -136,6 +136,252 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/subjects/{subjectId}":
+    put:
+      tags:
+        - subject-controller
+      operationId: updateSubject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SubjectRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SubjectResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    delete:
+      tags:
+        - subject-controller
+      operationId: deleteSubject
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/classes/{classId}":
+    put:
+      tags:
+        - school-class-controller
+      operationId: updateClass
+      parameters:
+        - name: classId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SchoolClassRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolClassResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    delete:
+      tags:
+        - school-class-controller
+      operationId: deleteClass
+      parameters:
+        - name: classId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
   "/api/school-setting/periods/{periodId}":
     put:
       tags:
@@ -1514,114 +1760,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/teacher-attendance/check-out":
-    post:
-      tags:
-        - teacher-attendance-controller
-      operationId: checkOut
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/TeacherAttendanceCheckOutResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '409':
-          description: Conflict
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '422':
-          description: Unprocessable Entity
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/teacher-attendance/check-in":
-    post:
-      tags:
-        - teacher-attendance-controller
-      operationId: checkIn
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/TeacherAttendanceCheckInResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '409':
-          description: Conflict
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '422':
-          description: Unprocessable Entity
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
   "/api/substitutes/requests":
     get:
       tags:
@@ -1702,6 +1840,243 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/SubstituteRequestDetail"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/subjects":
+    get:
+      tags:
+        - subject-controller
+      operationId: getSubjects
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SubjectResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    post:
+      tags:
+        - subject-controller
+      operationId: createSubject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SubjectRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SubjectResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+  "/api/school/classes":
+    get:
+      tags:
+        - school-class-controller
+      operationId: getClasses
+      parameters:
+        - name: academicYear
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SchoolClassResponse"
+        '400':
+          description: Bad Request
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '404':
+          description: Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '409':
+          description: Conflict
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '422':
+          description: Unprocessable Entity
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiResponseObject"
+    post:
+      tags:
+        - school-class-controller
+      operationId: createClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SchoolClassRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/SchoolClassResponse"
         '400':
           description: Bad Request
           content:
@@ -3302,116 +3677,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/teacher-attendance/today":
-    get:
-      tags:
-        - teacher-attendance-controller
-      operationId: getToday
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/TeacherAttendanceTodayResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '409':
-          description: Conflict
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '422':
-          description: Unprocessable Entity
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/teacher-attendance/school/today":
-    get:
-      tags:
-        - teacher-attendance-controller
-      operationId: getSchoolAttendanceToday
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/TeacherAttendanceTodayResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '409':
-          description: Conflict
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '422':
-          description: Unprocessable Entity
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
   "/api/school/unavailabilities":
     get:
       tags:
@@ -3805,140 +4070,6 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/administration-staff/employees/{userStoreId}/profile":
-    get:
-      tags:
-        - view-profile-controller
-      operationId: getEmployeeProfile
-      parameters:
-        - name: userStoreId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ViewProfileResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '409':
-          description: Conflict
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '422':
-          description: Unprocessable Entity
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-  "/api/administration-staff/employees/{userStoreId}/attendance":
-    get:
-      tags:
-        - view-attendance-controller
-      operationId: getEmployeeAttendance
-      parameters:
-        - name: userStoreId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: startDate
-          in: query
-          required: true
-          schema:
-            type: string
-            format: date
-        - name: endDate
-          in: query
-          required: true
-          schema:
-            type: string
-            format: date
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ViewAttendanceResponse"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '401':
-          description: Unauthorized
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '403':
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '409':
-          description: Conflict
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '422':
-          description: Unprocessable Entity
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiResponseObject"
   "/api/mypage/teacher/schools/{schoolId}":
     delete:
       tags:
@@ -4169,6 +4300,54 @@ components:
         updatedAt:
           type: string
           format: date-time
+    SubjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    SubjectResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    SchoolClassRequest:
+      type: object
+      properties:
+        academicYear:
+          type: integer
+          format: int32
+        grade:
+          type: integer
+          format: int32
+        classNumber:
+          type: integer
+          format: int32
+        homeroomTeacherSchoolUserId:
+          type: integer
+          format: int64
+    SchoolClassResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        academicYear:
+          type: integer
+          format: int32
+        grade:
+          type: integer
+          format: int32
+        classNumber:
+          type: integer
+          format: int32
+        homeroomTeacherSchoolUserId:
+          type: integer
+          format: int64
+        homeroomTeacherName:
+          type: string
     PeriodSettingRequest:
       type: object
       properties:
@@ -4541,6 +4720,11 @@ components:
       properties:
         action:
           type: string
+          description: 'respond: ACCEPT|REJECT, approve: APPROVE|REJECT'
+          enum:
+            - ACCEPT
+            - REJECT
+            - APPROVE
     School:
       type: object
       properties:
@@ -4685,32 +4869,6 @@ components:
         endDate:
           type: string
           format: date
-    TeacherAttendanceCheckOutResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        workDate:
-          type: string
-          format: date
-        status:
-          type: string
-        checkOutTime:
-          type: string
-          format: date-time
-    TeacherAttendanceCheckInResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        workDate:
-          type: string
-          format: date
-        status:
-          type: string
-        checkInTime:
-          type: string
-          format: date-time
     SubstituteCreateRequest:
       type: object
       properties:
@@ -4999,7 +5157,7 @@ components:
         date:
           type: string
           format: date
-        storeTodos:
+        schoolTodos:
           type: array
           items:
             "$ref": "#/components/schemas/TodoResponseDto"
@@ -5063,24 +5221,29 @@ components:
           format: int64
         status:
           type: string
-    TeacherAttendanceTodayResponse:
+    HomeroomClassInfo:
       type: object
       properties:
-        workDate:
+        classId:
+          type: integer
+          format: int64
+        academicYear:
+          type: integer
+          format: int32
+        grade:
+          type: integer
+          format: int32
+        classNumber:
+          type: integer
+          format: int32
+    SubjectInfo:
+      type: object
+      properties:
+        subjectId:
+          type: integer
+          format: int64
+        subjectName:
           type: string
-          format: date
-        status:
-          type: string
-        isCheckedIn:
-          type: boolean
-        isCheckedOut:
-          type: boolean
-        checkInTime:
-          type: string
-          format: date-time
-        checkOutTime:
-          type: string
-          format: date-time
     TeacherSummaryResponse:
       type: object
       properties:
@@ -5096,6 +5259,17 @@ components:
           type: string
         employmentStatus:
           type: string
+        subjects:
+          type: array
+          items:
+            "$ref": "#/components/schemas/SubjectInfo"
+        homeroomClasses:
+          type: array
+          items:
+            "$ref": "#/components/schemas/HomeroomClassInfo"
+        weeklyLessonCount:
+          type: integer
+          format: int32
     SchoolSummaryResponse:
       type: object
       properties:
@@ -5120,6 +5294,9 @@ components:
     NotificationResponseDto:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         schoolName:
           type: string
         profileImageUrl:
@@ -5156,6 +5333,9 @@ components:
         substituteRequestId:
           type: integer
           format: int64
+        substituteResponseId:
+          type: integer
+          format: int64
         timetableSwapStatus:
           type: string
           enum:
@@ -5178,64 +5358,6 @@ components:
             - EXPIRED
         read:
           type: boolean
-    ViewProfileResponse:
-      type: object
-      properties:
-        username:
-          type: string
-        profileImageUrl:
-          type: string
-        status:
-          type: string
-        position:
-          type: string
-        schoolName:
-          type: string
-        email:
-          type: string
-        hireDate:
-          type: string
-          format: date
-        daysWorked:
-          type: integer
-          format: int64
-    ViewAttendanceDayDto:
-      type: object
-      properties:
-        workDate:
-          type: string
-          format: date
-        attendanceStatus:
-          type: string
-    ViewAttendanceResponse:
-      type: object
-      properties:
-        schoolUserId:
-          type: integer
-          format: int64
-        teacherName:
-          type: string
-        role:
-          type: string
-        totalAttendance:
-          type: integer
-          format: int32
-        totalLateCount:
-          type: integer
-          format: int32
-        totalAbsentCount:
-          type: integer
-          format: int32
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        attendances:
-          type: array
-          items:
-            "$ref": "#/components/schemas/ViewAttendanceDayDto"
   securitySchemes:
     bearerAuth:
       type: http
